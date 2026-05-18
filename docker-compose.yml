@@ -13,30 +13,17 @@ services:
     image: redis:7-alpine
     
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.0
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-
-  kafka:
-    image: confluentinc/cp-kafka:7.5.0
-    depends_on: [zookeeper]
-    
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
+  
+  
   backend:
     build: ./backend
-    depends_on: [postgres, redis, kafka]
+    depends_on: [postgres, redis]
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-linkforge}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-linkforge}
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-linkforge}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-linkforge_secure_2026}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      
       JWT_SECRET: ${JWT_SECRET:-Qw7xN2pLm9KfR4tYv8Uz1Hs6Bd3Ee0AaWqPpLxM}
       APP_BASE_URL: http://localhost:8081
     ports: ["8081:8080"]
