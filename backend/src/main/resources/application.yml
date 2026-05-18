@@ -1,0 +1,47 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: linkforge
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/linkforge}
+    username: ${SPRING_DATASOURCE_USERNAME:linkforge}
+    password: ${SPRING_DATASOURCE_PASSWORD:linkforge}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: linkforge-analytics
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+app:
+  base-url: ${APP_BASE_URL:http://localhost:8081}
+  jwt:
+    secret: ${JWT_SECRET:change-me-to-a-long-random-string-please-32chars-min}
+    access-expiration-ms: ${JWT_ACCESS_EXPIRATION_MS:900000}
+    refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}
+  ratelimit:
+    capacity: 60
+    refill-tokens: 60
+    refill-period-seconds: 60
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
