@@ -6,12 +6,12 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-linkforge}
       POSTGRES_USER: ${POSTGRES_USER:-linkforge}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-linkforge_secure_2026}
-    ports: ["5432:5432"]
+    
     volumes: [pgdata:/var/lib/postgresql/data]
 
   redis:
     image: redis:7-alpine
-    ports: ["6379:6379"]
+    
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -21,7 +21,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     depends_on: [zookeeper]
-    ports: ["9092:9092"]
+    
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
