@@ -35,7 +35,7 @@ public class SecurityConfig {
   @Bean CorsFilter corsFilter(){
     var src = new UrlBasedCorsConfigurationSource();
     var cfg = new CorsConfiguration();
-    cfg.setAllowedOriginPatterns(List.of("*"));
+    cfg.setAllowedOrigins(List.of("https://yourfrontend.vercel.app"));
     cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
     cfg.setAllowedHeaders(List.of("*"));
     cfg.setAllowCredentials(true);
