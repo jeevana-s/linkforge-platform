@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-linkforge}
       POSTGRES_USER: ${POSTGRES_USER:-linkforge}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-linkforge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-linkforge_secure_2026}
     ports: ["5432:5432"]
     volumes: [pgdata:/var/lib/postgresql/data]
 
@@ -37,7 +37,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-linkforge}
       SPRING_DATA_REDIS_HOST: redis
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      JWT_SECRET: ${JWT_SECRET:-change-me-to-a-long-random-string-please-32chars-min}
+      JWT_SECRET: ${JWT_SECRET:-Qw7xN2pLm9KfR4tYv8Uz1Hs6Bd3Ee0AaWqPpLxM}
       APP_BASE_URL: http://localhost:8081
     ports: ["8081:8080"]
 
