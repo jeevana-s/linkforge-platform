@@ -34,7 +34,7 @@ spring:
 app:
   base-url: ${APP_BASE_URL:http://localhost:8081}
   jwt:
-    secret: ${JWT_SECRET=Qw7xN2pLm9KfR4tYv8Uz1Hs6Bd3Ee0AaWqPpLxM-32chars-min}
+    secret: ${JWT_SECRET:Qw7xN2pLm9KfR4tYv8Uz1Hs6Bd3Ee0AaWqPpLxM}
     access-expiration-ms: ${JWT_ACCESS_EXPIRATION_MS:900000}
     refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}
   ratelimit:
